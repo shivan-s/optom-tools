@@ -2,6 +2,42 @@
 requires = ["setuptools >= 62.1.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
+[project]
+name = "optom_tools"
+version = "0.0.1"
+authors = [
+  { name = "Shivan Sivakumaran" },
+  { email = "<shivan.sivakumaran@gmail.com>" },
+]
+requires-python = ">=3.10"
+description = "Providing tools for optometrists."
+readme = { file = "README.md", content-type = "text/markdown" }
+license = { text = "MIT" }
+keywords = ["optom", "optometry", "optometrist", "calculations"]
+dependencies = ["pyttsx3", "rich"]
+classifiers = [
+  "License :: OSI Approved :: MIT License",
+  "Development Status :: 5 - Production/Stable",
+  "Intended Audience :: Healthcare Industry",
+  "Natural Language :: English",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: Implementation :: CPython",
+]
+
+[project.scripts]
+optom-automator = "optom_tools.main:main"
+
+[project.urls]
+homepage = "https://github.com/shivan-s/optom-tools"
+repository = "https://github.com/shivan-s/optom-tools"
+changelog = "https://github.com/shivan-s/optom-tools/blob/main/CHANGELOG.md"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["optom_tools*"]
+exclude = ["tests"]
+
 [tool.pyright]
 include = "src"
 venv = ".venv"
@@ -12,7 +48,7 @@ profile = "black"
 multi_line_output = 3
 line_length = 79
 default_section = "THIRDPARTY"
-known_first_party = []
+known_first_party = ["optom_tools"]
 known_third_party = ["pytest", "setuptools"]
 
 [tool.black]
@@ -20,7 +56,7 @@ line-length = 79
 include = '.pyi?%'
 
 [tool.pytest.ini_options]
-addopts = "--cov=src"
+addopts = "--cov-report=html --cov=src"
 testpaths = ["tests"]
 
 [tool.mypy]

@@ -4,6 +4,6 @@ import pytest
 
 
 @pytest.fixture
-def a_fixture():
-    """."""
+def example_acuity():
+    """Provide example of a visual acuity."""
     pass
