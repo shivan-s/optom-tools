@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools >= 62.1.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.pyright]
+include = "src"
+venv = ".venv"
+venvPath = "."
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 79
+default_section = "THIRDPARTY"
+known_first_party = []
+known_third_party = ["pytest", "setuptools"]
+
+[tool.black]
+line-length = 79
+include = '.pyi?%'
+
+[tool.pytest.ini_options]
+addopts = "--cov=src"
+testpaths = ["tests"]
+
+[tool.mypy]
+mypy_path = "src"
+ignore_missing_imports = true
+
+[tool.pydocstyle]
+match = '.*\.py'
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+version = "0.0.1"
+tag_format = "$version"

@@ -1,0 +1,6 @@
+---
+site_name: Python Templates
+site_url: https://shivan-s-python-template.readthedocs.io/
+nav:
+  - Home: index.md
+theme: readthedocs
