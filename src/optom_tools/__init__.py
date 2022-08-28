@@ -1,5 +1,5 @@
 """Project level init file."""
 
-from .main import Rx, VisualAcuity
+from .main import Prescription, VisualAcuity
 
-__all__ = ["VisualAcuity", "Presription", "Rx"]
+__all__ = ["VisualAcuity", "Prescription"]
