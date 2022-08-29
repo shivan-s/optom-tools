@@ -1,6 +1,6 @@
 ---
-site_name: Python Templates
-site_url: https://shivan-s-python-template.readthedocs.io/
+site_name: Optom Tools
+site_url: https://shivan-s.github.io/optom-tools
 nav:
   - Home: index.md
 theme: readthedocs
