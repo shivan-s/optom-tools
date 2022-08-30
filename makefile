@@ -28,4 +28,4 @@ serve-docs:
 # Deploy the documentation
 .PHONY: deploy-docs
 deploy-docs:
-	pipenv run mkdocs serve
+	pipenv run mkdocs gh-deploy

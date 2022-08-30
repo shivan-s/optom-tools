@@ -10,8 +10,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
-        python-version: ["3.10"]
+        os: [ubuntu-latest, macos-latest]
+        python-version: ["3.7", "3.8", "3.9", 3.10"]
 
     steps:
       - id: checkout
@@ -36,6 +36,11 @@ jobs:
         name: Install dependencies
         run: |
           pipenv install --dev --python ${{matrix.python-version}} --skip-lock
+
+      - id: upload-docs
+        name: Upload documentation via mkdocs + gh-deploy
+        run: |
+          pipenv run mkdocs gh-deploy
 
       - id: test-tox
         name: Test with tox
