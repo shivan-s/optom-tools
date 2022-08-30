@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "optom_tools"
-version = "0.0.4"
+version = "0.0.5"
 authors = [
   { name = "Shivan Sivakumaran" },
   { email = "<shivan.sivakumaran@gmail.com>" },
@@ -67,5 +67,5 @@ match = '.*\.py'
 [tool.commitizen]
 name = "cz_conventional_commits"
 version_files = ["src/optom_tools/__init__.py", "pyproject.toml"]
-version = "0.0.4"
+version = "0.0.5"
 tag_format = "$version"

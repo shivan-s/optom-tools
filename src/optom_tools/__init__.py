@@ -4,4 +4,4 @@ from .main import Prescription, VisualAcuity
 
 __all__ = ["VisualAcuity", "Prescription"]
 
-__version__ = "0.0.4"
+__version__ = "0.0.5"
