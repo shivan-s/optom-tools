@@ -1,12 +1,15 @@
+# run on ipytho
 .PHONY: run
 run:
 	pipenv run ipython -i src/optom_tools/main.py
 
+# run tests
 ARGPATH="."
 .PHONY: test
 test:
 	pipenv run pytest -vv -k $(ARGPATH)
 
+# install packages and pre-commit
 .PHONY: install
 install:
 	pre-commit install && \

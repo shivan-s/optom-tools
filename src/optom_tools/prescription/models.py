@@ -2,9 +2,19 @@
 
 from typing import Literal
 
-from pydantic import BaseModel, validator
+from pydantic import BaseModel as PydanticBaseModel
+from pydantic import validator
 
 from .exceptions import PrescriptionInputError
+
+
+class BaseModel(PydanticBaseModel):
+    """Monkey patching pydantic `BaseModel`."""
+
+    class Config:
+        """Configation of model."""
+
+        validate_assignment = True
 
 
 class BasePrism(BaseModel):
@@ -62,8 +72,19 @@ class Rx(BaseModel):
     @classmethod
     def axis_valid(cls, value: float) -> float:
         """Validate axis."""
-        if value >= 180 and value <= 0:
+        if value > 180 or value < 0:
             raise PrescriptionInputError(
                 value=value, message="Axis must be between 0 and 180 degrees"
             )
+        if value == 0:
+            cls.axis = 180
         return value
+
+    @property
+    def mean_sphere(self) -> float:
+        """Provide mean sphere value of the prescription.
+
+        Returns:
+            (float): The Mean Sphere.
+        """
+        return self.sphere + (self.cylinder / 2)
