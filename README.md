@@ -1,10 +1,13 @@
-# Optom Tools
+# Optom Tools |⚠️ Under develepment ⚠️
 
 [![Build](https://github.com/shivan-s/optom-tools/actions/workflows/build.yml/badge.svg)](https://github.com/shivan-s/python-template/actions/workflows/build.yml)
-[![pages-build-deployment](https://github.com/optom-tools/python-template/actions/workflows/pages/pages-build-deployment/badge.svg?branch=gh-pages)](https://github.com/shivan-s/python-template/actions/workflows/pages/pages-build-deployment)
+![Docs](https://github.com/optom-tools/python-template/actions/workflows/pages/pages-build-deployment/badge.svg?branch=gh-pages)
 ![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)
-
-## ⚠️ Under develepment ⚠️
+[![Latest Version](https://img.shields.io/pypi/v/optom-tools.svg)](https://pypi.python.org/pypi/optom-tools/)
+[![Format](https://img.shields.io/pypi/format/optom-tools.svg)](https://pypi.python.org/pypi/optom-tools/)
+[![Python Versions](https://img.shields.io/pypi/pyversions/optom-tools.svg)](https://pypi.python.org/pypi/optom-tools/)
+[![Implementation](https://img.shields.io/pypi/implementation/optom-tools.svg)](https://pypi.python.org/pypi/optom-tools/)
+[![License](https://img.shields.io/pypi/status/optom-tools.svg)](https://pypi.python.org/pypi/optom-tools/)
 
 ## Getting Started
 
