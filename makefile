@@ -13,6 +13,7 @@ install:
 	pre-commit autoupdate && \
 	pipenv install --skip-lock --dev
 
+# build the packages
 .PHONY: build
 build:
 	rm -rf build && \
