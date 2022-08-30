@@ -1,4 +1,4 @@
-# Optom Tools |⚠️ Under develepment ⚠️
+# Optom Tools ⚠️ Under develepment ⚠️
 
 [![Build](https://github.com/shivan-s/optom-tools/actions/workflows/build.yml/badge.svg)](https://github.com/shivan-s/python-template/actions/workflows/build.yml)
 [![Deploy Docs](https://github.com/shivan-s/optom-tools/actions/workflows/docs.yml/badge.svg)](https://github.com/shivan-s/optom-tools/actions/workflows/docs.yml)

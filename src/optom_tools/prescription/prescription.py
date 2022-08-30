@@ -131,6 +131,7 @@ class Prescription:
             str_lst.append(f"{rx.axis}")
         return "".join(str_lst)
 
-    def __repr__(self) -> Rx:
+    def __repr__(self) -> str:
         """Provide representation."""
-        return self._Rx
+        lst = str(self._Rx).split(" ")
+        return f"{self.__class__.__name__}({', '.join(lst)})"
