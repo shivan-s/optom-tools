@@ -5,6 +5,7 @@ nav:
   - Home: index.md
 theme: material
 watch:
-  - src plugins:
+  - src
+plugins:
   - search
   - mkdocstrings
