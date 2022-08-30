@@ -37,11 +37,6 @@ jobs:
         run: |
           pipenv install --dev --python ${{matrix.python-version}} --skip-lock
 
-      - id: upload-docs
-        name: Upload documentation via mkdocs + gh-deploy
-        run: |
-          pipenv run mkdocs gh-deploy
-
       - id: test-tox
         name: Test with tox
         run: |
