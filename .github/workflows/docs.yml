@@ -1,11 +1,11 @@
 ---
-name: Deploy Docs
+name: Docs
 on:
   - push
   - pull_request
 
 jobs:
-  deploy:
+  docs:
     runs-on: ubuntu-latest
     steps:
       - id: checkout
