@@ -14,10 +14,10 @@ description = "Providing tools for optometrists."
 readme = { file = "README.md", content-type = "text/markdown" }
 license = { text = "MIT" }
 keywords = ["optom", "optometry", "optometrist", "calculations"]
-dependencies = ["pyttsx3", "rich"]
+dependencies = ["rich"]
 classifiers = [
   "License :: OSI Approved :: MIT License",
-  "Development Status :: 5 - Production/Stable",
+  "Development Status :: 1 - Planning",
   "Intended Audience :: Healthcare Industry",
   "Natural Language :: English",
   "Programming Language :: Python :: 3",
@@ -25,13 +25,11 @@ classifiers = [
   "Programming Language :: Python :: Implementation :: CPython",
 ]
 
-[project.scripts]
-optom-automator = "optom_tools.main:main"
-
 [project.urls]
 homepage = "https://github.com/shivan-s/optom-tools"
 repository = "https://github.com/shivan-s/optom-tools"
 changelog = "https://github.com/shivan-s/optom-tools/blob/main/CHANGELOG.md"
+documentation = "https://shivan-s.github.io/optom-tools"
 
 [tool.setuptools.packages.find]
 where = ["src"]

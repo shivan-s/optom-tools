@@ -62,7 +62,23 @@ class TestPrescription:
             pytest.param("+1.00", "+1.00 DS", id="Sphere only"),
         ],
     )
-    def test_prescription_str(self, input, expected):
+    def test_prescription_str(self, test_input, expected):
         """Prescription string representation."""
-        rx = Prescription(input)
+        rx = Prescription(test_input)
         assert str(rx) == expected
+
+    @pytest.mark.parametrize(
+        "input,expected",
+        [
+            pytest.param("pl", Rx(sphere=0), id="Plano"),
+            pytest.param(
+                "plano/-0.75x180",
+                Rx(sphere=0, cylinder=-0.75, axis=180),
+                id="Cyl",
+            ),
+        ],
+    )
+    def test_prescription_repr(self, test_input, expected):
+        """Prescrption representation."""
+        rx = Prescription(test_input)
+        assert rx == expected

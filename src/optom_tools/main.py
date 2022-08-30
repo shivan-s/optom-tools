@@ -5,8 +5,8 @@ from decimal import Decimal
 
 from rich.logging import RichHandler
 
-from .prescription import Prescription
-from .visual_acuity import VisualAcuity
+from optom_tools.prescription import Prescription
+from optom_tools.visual_acuity import VisualAcuity
 
 __all__ = ["Prescription", "VisualAcuity"]
 

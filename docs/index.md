@@ -1,8 +1,8 @@
 # Optom Tools
 
-Welcome. These are a set of tools for optometrists.
+`optom-tools` are a set of tools for working with data associated in the wonderful world of optometry.
 
-## Installation
+## Getting Started
 
 Install with `pip` or your other favourite package manager (e.g. `pipenv` or `poetry`).
 
@@ -10,7 +10,7 @@ Install with `pip` or your other favourite package manager (e.g. `pipenv` or `po
 pip install optom-tools
 ```
 
-## Example
+## Simple Example
 
 ```python
 >>> from optom_tools import Prescription
@@ -20,9 +20,24 @@ pip install optom-tools
 >>> prescription.transpose()
 
 >>> print(str(prescription))
-"-1.00/+2.00x90"
+"-1.00 / +2.00 x 90"
 ```
 
-## prescription
+## Prescription
+
+::: optom_tools.Prescription
+    options:
+      members:
+        - transpose
+        - rx
+      show_source: false
+
+
 
 ## Visual Acuity
+
+*Work in progress*
+
+<!-- ::: optom_tools.VisualAcuity -->
+<!--     options: -->
+<!--       show_source: false -->

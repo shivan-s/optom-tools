@@ -7,14 +7,23 @@ from .models import Rx
 
 
 class Prescription:
-    """Prescription."""
+    """The prescription module contains methods to deal with spectacle prescriptions.
+
+    Args:
+        rx (str): The spectacle prescription.
+        rx_type (Literal["simple", "efficient"] | None): The type of parser.
+
+    Examples:
+        Ingesting a prescription.
+        >>> p = Prescription("pl/-1.00x90")
+    """
 
     def __init__(
         self,
         rx: str,
         rx_type: Literal["simple", "efficient"] | None = "simple",
     ) -> None:
-        """Construct prescription."""
+        """Input for the `Prescription` class."""
         self._rx = rx
         self._rx_type = rx_type
 
@@ -65,9 +74,26 @@ class Prescription:
     def transpose(self, value: Literal["n", "p"] | None = None) -> None:
         """Transpose prescription from positive to negative and vice versa.
 
+        Flags, `'n'` and `'p'`, can be provided to force a negative or positive cylinder respectively.
+
+
         Args:
-            value (Literal["n", "p"] | None): Flag to force negative ('n') and
-            positive ('p') cylindrical format.
+            value (Literal["n", "p"] | None): Flag to force negative ('n') and positive ('p') cylindrical format. Defaults to `None`.
+
+        Examples:
+            Transposing a prescription as normal.
+            >>> p = Prescription("+1.00/-1.00x180")
+            >>> p.transpose()
+            >>> p
+            "plano / +1.00 x 90"
+            >>> p.transpose()
+            >>> p
+            "+1.00 / -1.00 x 180"
+
+            Transposing a prescription with the 'n' flag.
+            >>> p = Prescription("+1.00/-1.00x180").transpose('n')
+            >>> p
+            "+1.00 / -1.00 x 180"
         """
         if value is not None and value not in ["n", "p"]:
             raise TransposeInputError(

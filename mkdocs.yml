@@ -3,4 +3,8 @@ site_name: Optom Tools
 site_url: https://shivan-s.github.io/optom-tools
 nav:
   - Home: index.md
-theme: readthedocs
+theme: material
+watch:
+  - src plugins:
+  - search
+  - mkdocstrings

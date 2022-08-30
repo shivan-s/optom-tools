@@ -19,3 +19,7 @@ build:
 	rm -rf dist && \
 	rm -rf optom_tools.egg-info && \
 	pipenv run python setup.py sdist bdist_wheel
+
+.PHONY: serve-docs
+serve-docs:
+	pipenv run mkdocs serve
