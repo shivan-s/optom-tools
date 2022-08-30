@@ -35,7 +35,7 @@ jobs:
       - id: install-dependencies
         name: Install dependencies
         run: |
-          pipenv install --dev --python ${{matrix.python-version}} --skip-lock
+          pipenv install --system --dev --python ${{matrix.python-version}} --skip-lock
 
       - id: test-tox
         name: Test with tox
