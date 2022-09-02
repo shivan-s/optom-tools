@@ -25,7 +25,7 @@ class VisualAcuity(BaseModel):
 
     Args:
         numerator (int): The test distance.
-        denominator (int): TODO *To write*
+        denominator (int): This distance required to subtend 5 minutes of arc.
         unit (Literal["ft", "m"]): Takes feet or metres/meters only. Defaults to 'm', but please check examples for nuances.
 
     Examples:
@@ -83,7 +83,7 @@ class VisualAcuity(BaseModel):
     def __init__(self, *args, **kwargs):
         """Init method."""
         if len(args) >= 1:
-            components = self._simple_va_parse(args[0])
+            components = self._simple_parse_va(args[0])
             kwargs["numerator"] = components[0]
             kwargs["denominator"] = components[1]
             kwargs["unit"] = components[2]
@@ -220,7 +220,7 @@ class VisualAcuity(BaseModel):
         """
         return D(math.log10(self.decimal))
 
-    def _simple_va_parse(self, va: str) -> Tuple[str, str, Literal["ft", "m"]]:
+    def _simple_parse_va(self, va: str) -> Tuple[str, str, Literal["ft", "m"]]:
         """Parse va string into a tuple.
 
         This tuple is numerator, denominator, unit.
@@ -258,7 +258,7 @@ class VisualAcuity(BaseModel):
             >>> va.unit
             'ft'
         """
-        components = self._simple_va_parse(va=va)
+        components = self._simple_parse_va(va=va)
         self.numerator = float(components[0])
         self.denominator = float(components[1])
         self.unit = components[2]

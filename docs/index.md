@@ -25,7 +25,7 @@ pip install optom-tools
 # myscript.py
 from optom_tools import Prescription
 
-rx = Prescription("+1.00/-2.00x180")
+rx = Prescription.parse("+1.00/-2.00x180")
 rx.transpose()
 
 print(str(prescription))

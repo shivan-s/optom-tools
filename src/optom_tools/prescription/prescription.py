@@ -1,6 +1,6 @@
 """Main entry point for the pydantic model."""
 
-from typing import List, Optional
+from typing import List, Optional, Tuple
 
 import pydantic
 from typing_extensions import Literal
@@ -56,6 +56,15 @@ class Prescription(BaseModel):
         """
         return self.sphere + (self.cylinder / 2)
 
+    def __init__(self, *args, **kwargs):
+        """Init method."""
+        if len(args) >= 1:
+            components = self._simple_parse_rx(args[0])
+            kwargs["sphere"] = components[0]
+            kwargs["cylinder"] = components[1]
+            kwargs["axis"] = components[2]
+        super().__init__(**kwargs)
+
     def transpose(self, flag: Optional[Literal["n", "p"]] = None) -> None:
         """Transpose prescription from positive to negative and vice versa.
 
@@ -99,13 +108,19 @@ class Prescription(BaseModel):
                 new_axis = new_axis - 180
             self.axis = new_axis
 
-    def _simple_parse_rx(self, rx: str) -> None:
+    def _simple_parse_rx(self, rx: str) -> Tuple[str, str, str]:
         """Parse rx for a simple input.
+
+        And returns a tuple with sphere, cylinder and axis as strings.
 
         For example: simple input is '+1.00/-1.00x90'
         """
         # TODO: parse this '+1.00/-1.00x90 Add +2.00@40'
         rx_components = rx.split("/")
+        if len(rx_components) > 2:
+            raise PrescriptionError(
+                value=rx_components, message="Only one '/' can be parsed."
+            )
         sphere = rx_components[0]
         cylinder = "0"
         axis = "180"
@@ -119,18 +134,17 @@ class Prescription(BaseModel):
         if type(sphere) == str and sphere[0:2] == "pl":
             sphere = "0"
 
-        self.sphere = float(sphere)
-        self.cylinder = float(cylinder)
-        self.axis = float(axis)
+        return (sphere, cylinder, axis)
 
-    def parse(self, rx: str, efficient_parser: bool = False) -> BaseModel:
+        # TODO: efficient Rx parser to be written.
+
+    def parse(self, rx: str) -> BaseModel:
         """Parse a prescription in a more typical format.
 
         This is more familiar than setting a prescription using keyword arguments.
 
         Args:
             rx (str): The prescription as a string.
-            efficient_parser (bool): If set to `True`, will use the efficient parser as opposed to simple.
 
         Examples:
             Parsing a simple prescription:
@@ -138,15 +152,12 @@ class Prescription(BaseModel):
             >>> rx.transpose()
             >>> str(rx)
             'pl / +1.00 x 90'
-
-            Parsing a 'efficient' prescription:
-            >>> # TODO!
-            >>> # Coming soon.
         """
-        if not efficient_parser:
-            self._simple_parse_rx(rx)
+        rx_tuple = self._simple_parse_rx(rx)
+        self.sphere = float(rx_tuple[0])
+        self.cylinder = float(rx_tuple[1])
+        self.axis = float(rx_tuple[2])
         return self
-        # TODO: efficient Rx parser to be written.
 
     def __str__(self) -> str:
         """Provide string representation of object."""

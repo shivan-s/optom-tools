@@ -16,8 +16,8 @@ class TestPrescription:
         [
             pytest.param({}, "plano", does_not_raise(), None, id="No inputs"),
             pytest.param(
-                {"sphere": 1.5, "cylinder": -1, "axis": 90},
-                "+1.50 / -1.00 x 90",
+                {"sphere": 0, "cylinder": -1, "axis": 90},
+                "plano / -1.00 x 90",
                 does_not_raise(),
                 None,
                 id="Normal input",
@@ -166,56 +166,47 @@ class TestPrescription:
         assert test_input.mean_sphere == expected
 
     @pytest.mark.parametrize(
-        "test_input,test_efficient,expected,exception,exception_message",
+        "test_input,expected,exception,exception_message",
         [
             pytest.param(
                 "+1.00/-1.00x90",
-                None,
                 Prescription(sphere=1, cylinder=-1, axis=90),
                 does_not_raise(),
                 None,
                 id="Normal input",
             ),
             pytest.param(
-                "+1.00/-1.00x90",
-                False,
-                Prescription(sphere=1, cylinder=-1, axis=90),
+                "plano",
+                Prescription(sphere=0),
                 does_not_raise(),
                 None,
-                id="Normal input",
+                id="plano",
             ),
             pytest.param(
-                "pl/-1.00x90",
-                False,
+                "plano/-1.00x90/",
                 Prescription(sphere=0, cylinder=-1, axis=90),
-                does_not_raise(),
-                None,
-                id="Normal input",
-            ),
-            pytest.param(
-                "plano/-1.00x90",
-                False,
-                Prescription(sphere=0, cylinder=-1, axis=90),
-                does_not_raise(),
-                None,
-                id="Normal input",
+                pytest.raises(PrescriptionError),
+                "Only one '/' can be parsed.",
+                id="2 '/'",
             ),
         ],
     )
     def test_parse(
         self,
         test_input,
-        test_efficient,
         expected,
         exception,
         exception_message,
     ):
         """Test transpose() method and flags."""
         with exception as excinfo:
-            if test_efficient is None:
-                rx = Prescription().parse(test_input)
-            else:
-                rx = Prescription().parse(test_input, efficient_parser=test_efficient)
+            rx = Prescription().parse(test_input)
+            assert rx == expected
+        if excinfo is not None:
+            assert excinfo.value.message == exception_message
+
+        with exception as excinfo:
+            rx = Prescription(test_input)
             assert rx == expected
         if excinfo is not None:
             assert excinfo.value.message == exception_message
