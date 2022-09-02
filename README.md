@@ -1,6 +1,6 @@
 # Optom Tools ⚠️ Under develepment ⚠️
 
-[![Build](https://github.com/shivan-s/optom-tools/actions/workflows/build.yml/badge.svg)](https://github.com/shivan-s/python-template/actions/workflows/build.yml)
+[![Build](https://github.com/shivan-s/optom-tools/actions/workflows/build.yml/badge.svg)](https://github.com/shivan-s/optom-tools/actions/workflows/build.yml)
 [![Deploy Docs](https://github.com/shivan-s/optom-tools/actions/workflows/docs.yml/badge.svg)](https://github.com/shivan-s/optom-tools/actions/workflows/docs.yml)
 ![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)
 [![Latest Version](https://img.shields.io/pypi/v/optom-tools.svg)](https://pypi.python.org/pypi/optom-tools/)

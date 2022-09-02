@@ -62,7 +62,7 @@ class Prescription(BaseModel):
 
 
         Args:
-            flag (Literal["n", "p"] | None): Flag to force negative ('n') and positive ('p') cylindrical format. Defaults to `None`.
+        ]            flag (Optional[[Literal["n", "p"]]): Flag to force negative ('n') and positive ('p') cylindrical format. Defaults to `None`.
 
         Examples:
             Transposing a prescription as normal:

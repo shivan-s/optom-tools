@@ -1,6 +1,6 @@
 """Supporting models for the main Prescription model."""
 
-from typing import Literal
+from typing import Literal, Optional
 
 from pydantic import BaseModel as PydanticBaseModel
 from pydantic import validator
@@ -22,7 +22,7 @@ class BasePrism(BaseModel):
 
     magnitude: float = 0
 
-    @validator("magnitude")
+    @validator("magnitude", allow_reuse=True)
     @classmethod
     def _magnitude_validate(cls, value: float) -> float:
         """Validate magnitude.
@@ -44,7 +44,7 @@ class HorizontalPrism(BasePrism):
     out).
     """
 
-    direction: Literal["R", "L", "I", "O"] | None
+    direction: Optional[Literal["R", "L", "I", "O"]] = None
 
 
 class VerticalPrism(BasePrism):
@@ -53,7 +53,7 @@ class VerticalPrism(BasePrism):
     Note that the direction is related to base direction (e.g. up, down).
     """
 
-    direction: Literal["U", "D"] | None
+    direction: Optional[Literal["U", "D"]] = None
 
 
 class Add(BaseModel):
