@@ -1,9 +1,10 @@
 """Supporting models for the main Prescription model."""
 
-from typing import Literal, Optional
+from typing import Optional
 
 from pydantic import BaseModel as PydanticBaseModel
 from pydantic import validator
+from typing_extensions import Literal
 
 from .exceptions import PrescriptionError
 

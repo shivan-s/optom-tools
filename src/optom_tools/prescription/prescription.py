@@ -1,8 +1,9 @@
 """Main entry point for the pydantic model."""
 
-from typing import List, Literal, Optional
+from typing import List, Optional
 
 import pydantic
+from typing_extensions import Literal
 
 from optom_tools.utils import strip_decimal
 
@@ -60,9 +61,8 @@ class Prescription(BaseModel):
 
         Flags, `'n'` and `'p'`, can be provided to force a negative or positive cylinder respectively.
 
-
         Args:
-        ]            flag (Optional[[Literal["n", "p"]]): Flag to force negative ('n') and positive ('p') cylindrical format. Defaults to `None`.
+            (Optional[[Literal["n", "p"]]): Flag to force negative ('n') and positive ('p') cylindrical format. Defaults to `None`.
 
         Examples:
             Transposing a prescription as normal:

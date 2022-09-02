@@ -2,9 +2,10 @@
 
 import math
 from decimal import Decimal
-from typing import Literal, Optional, Tuple
+from typing import Optional, Tuple
 
 import pydantic
+from typing_extensions import Literal
 
 from optom_tools.utils import strip_decimal
 
