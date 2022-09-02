@@ -26,7 +26,7 @@ pip install optom-tools
 
 >>> prescription.transpose()
 
->>> prescription
+>>> str(prescription)
 
 "-1.00 / +2.00 x 90"
 ```

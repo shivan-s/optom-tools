@@ -22,15 +22,19 @@ pip install optom-tools
 ## Simple Example
 
 ```python
->>> from optom_tools import Prescription
+# myscript.py
+from optom_tools import Prescription
 
-# +1.00 / -2.00 x 180
->>> prescription = Prescription(sphere=1, cylinder=-2, axis=180)
+rx = Prescription("+1.00/-2.00x180")
+rx.transpose()
 
->>> prescription.transpose()
+print(str(prescription))
+```
 
->>> print(str(prescription))
-"-1.00 / +2.00 x 90"
+```sh
+$ python myscript.py
+
+-1.00 / +2.00 x 90
 ```
 
 ## Other Stuff

@@ -15,13 +15,13 @@ jobs:
       - name: Check out
         uses: actions/checkout@v2
         with:
-          token: "${{ secrets.GITHUB_TOKEN }}"
+          token: $ {{ secrets.PERSONAL_ACCESS_TOKEN }}
           fetch-depth: 0
       - name: Create bump and changelog
         uses: commitizen-tools/commitizen-action@master
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          changelog_increment_filename: BODY.md
+          github_token: $ {{ secrets.PERSONAL_ACCESS_TOKEN }}
+          changelog_increment_filename: CHANGELOG.md
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
