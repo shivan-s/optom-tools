@@ -16,6 +16,8 @@ pytest-cov = "*"
 pytest-xdist = "*"
 mkdocs-material = "*"
 mkdocstrings = {extras = ["python"], version = "*"}
+ipython = "*"
+mkdocs-autorefs = "*"
 
 [requires]
 python_version = "3.10"

@@ -9,7 +9,7 @@ authors = [
   { name = "Shivan Sivakumaran" },
   { email = "<shivan.sivakumaran@gmail.com>" },
 ]
-requires-python = ">=3.10"
+requires-python = ">=3.7"
 description = "Providing tools for optometrists."
 readme = { file = "README.md", content-type = "text/markdown" }
 license = { text = "MIT" }
@@ -17,7 +17,7 @@ keywords = ["optom", "optometry", "optometrist", "calculations"]
 dependencies = ["rich"]
 classifiers = [
   "License :: OSI Approved :: MIT License",
-  "Development Status :: 1 - Planning",
+  "Development Status :: 2 - Pre-Alpha",
   "Intended Audience :: Healthcare Industry",
   "Natural Language :: English",
   "Programming Language :: Python :: 3",

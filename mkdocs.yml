@@ -3,9 +3,28 @@ site_name: Optom Tools
 site_url: https://shivan-s.github.io/optom-tools
 nav:
   - Home: index.md
-theme: material
+  - Prescription: prescription.md
+  - Visual Acuity: visual_acuity.md
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-schema: dark)"
+      scheme: slate
+      primary: light-blue
+      accent: orange
+      toggle:
+        icon: material/eye-outline
+        name: Switch to light mode
+    - media: "(prefers-color-schema: light)"
+      scheme: default
+      primary: blue
+      accent: deep-orange
+      toggle:
+        icon: material/eye
+        name: Switch to dark mode
 watch:
   - src
 plugins:
   - search
   - mkdocstrings
+  - autorefs

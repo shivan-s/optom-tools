@@ -1,11 +1,11 @@
-"""Pydantic models related to the prescription module."""
+"""Supporting models for the main Prescription model."""
 
 from typing import Literal
 
 from pydantic import BaseModel as PydanticBaseModel
 from pydantic import validator
 
-from .exceptions import PrescriptionInputError
+from .exceptions import PrescriptionError
 
 
 class BaseModel(PydanticBaseModel):
@@ -21,6 +21,20 @@ class BasePrism(BaseModel):
     """Base Prism model."""
 
     magnitude: float = 0
+
+    @validator("magnitude")
+    @classmethod
+    def _magnitude_validate(cls, value: float) -> float:
+        """Validate magnitude.
+
+        The magnitude of a prism must be positive.
+        """
+        if value < 0:
+            raise PrescriptionError(
+                value=value,
+                message="The prism dioptre must be a positive number",
+            )
+        return value
 
 
 class HorizontalPrism(BasePrism):
@@ -45,46 +59,36 @@ class VerticalPrism(BasePrism):
 class Add(BaseModel):
     """Add model.
 
-    A patient's add along with working distance (e.g. +2.00 @ 40cm).
+    A patient's add along with working distance (e.g. +2.00 @ 40cm for music).
     """
 
     add: float = 0.0
     working_distance_cm: float = 40
+    description: str = ""
 
-
-class Rx(BaseModel):
-    """Rx model.
-
-    This is the models the prescription (rx is shorthand).
-    """
-
-    sphere: float = 0
-    cylinder: float = 0
-    axis: float = 180
-    vertical_prism: VerticalPrism = VerticalPrism()
-    horizontal_prism: HorizontalPrism = HorizontalPrism()
-    add: Add = Add()
-    intermediate_add: float = 0
-    extra_adds: list[Add] = []
-    back_vertex_mm: float = 12.0
-
-    @validator("axis")
+    @validator("add")
     @classmethod
-    def axis_valid(cls, value: float) -> float:
-        """Validate axis."""
-        if value > 180 or value < 0:
-            raise PrescriptionInputError(
-                value=value, message="Axis must be between 0 and 180 degrees"
+    def _add_validate(cls, value: float) -> float:
+        """Validate add.
+
+        Add must be a positive number.
+        """
+        if value < 0:
+            raise PrescriptionError(
+                value=value, message="Add must be a positive number"
             )
-        if value == 0:
-            cls.axis = 180
         return value
 
-    @property
-    def mean_sphere(self) -> float:
-        """Provide mean sphere value of the prescription.
+    @validator("working_distance_cm")
+    @classmethod
+    def _working_distance_cm_validate(cls, value: float) -> float:
+        """Validate add.
 
-        Returns:
-            (float): The Mean Sphere.
+        The working distance must be positive and no more than 600cm (what is considered optical infinity).
         """
-        return self.sphere + (self.cylinder / 2)
+        if value < 0 or value > 600:
+            raise PrescriptionError(
+                value=value,
+                message="Working Distance (cm) must be greater than 0 cm and no greater than 600cm",
+            )
+        return value

@@ -1,13 +1,12 @@
-"""Pydantic models for the visual acuity module."""
+"""Supporting models for the `VisualAcuity` model."""
 
-from typing import Literal
-
-from pydantic import BaseModel
+from pydantic import BaseModel as PydanticBaseModel
 
 
-class Va(BaseModel):
-    """Visual Acuity model."""
+class BaseModel(PydanticBaseModel):
+    """Monkey patching pydantic `BaseModel`."""
 
-    numerator: float
-    denominator: float
-    unit: Literal["ft", "m"] = "m"
+    class Config:
+        """Configation of model."""
+
+        validate_assignment = True

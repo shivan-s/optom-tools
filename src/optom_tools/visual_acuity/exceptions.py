@@ -1,9 +1,9 @@
-"""Custom exceptions related to the `prescrption` module."""
+"""Custom exceptions related to the `visual_acuity` module."""
 
 from typing import Any
 
 
-class PrescriptionError(Exception):
+class VisualAcuityError(Exception):
     """Prescription input error."""
 
     def __init__(self, value: Any, message: str) -> None:

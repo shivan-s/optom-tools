@@ -1,24 +1,10 @@
 """Main entry point for optom_tools."""
 
-import logging
-from decimal import Decimal
-
-from rich.logging import RichHandler
-
 from optom_tools.prescription import Prescription
+from optom_tools.utils import log
 from optom_tools.visual_acuity import VisualAcuity
 
-__all__ = ["Prescription", "VisualAcuity"]
-
-D = Decimal
-
-FORMAT = "%(message)s"
-LEVEL = "DEBUG"
-DATEFMT = "[%X]"
-logging.basicConfig(
-    level=LEVEL, format=FORMAT, datefmt=DATEFMT, handlers=[RichHandler()]
-)
-log = logging.getLogger("rich")
+__all__ = ["Prescription", "VisualAcuity", "log"]
 
 
 def main():

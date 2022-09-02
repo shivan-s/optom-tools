@@ -37,4 +37,4 @@ Comprehensive documentation can be found here: <https://shivan-s.github.io/optom
 
 ## Contribution
 
-Yes, please.
+Yes, please. I'd love some help on this.

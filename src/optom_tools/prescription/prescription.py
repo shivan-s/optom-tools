@@ -1,43 +1,111 @@
-"""Prescription."""
+"""Main entry point for the pydantic model."""
 
-from typing import Literal
+from typing import Literal, Optional
 
-from .exceptions import PrescriptionInputError, TransposeInputError
-from .models import Rx
+import pydantic
+
+from optom_tools.utils import strip_decimal
+
+from .exceptions import PrescriptionError
+from .models import Add, BaseModel, HorizontalPrism, VerticalPrism
 
 
-class Prescription:
+class Prescription(BaseModel):
     """The prescription module contains methods to deal with spectacle prescriptions.
 
-    Args:
-        rx (str): The spectacle prescription.
-        rx_type (Literal["simple", "efficient"] | None): The type of parser.
-
     Examples:
-        Ingesting a prescription.
-        >>> p = Prescription("pl/-1.00x90")
+        Typical use:
+        >>> rx = Prescription(sphere=0, cylinder=-1, axis=180)
+        >>> str(rx)
+        'plano / -1.00 x 180'
     """
 
-    def __init__(
-        self,
-        rx: str,
-        rx_type: Literal["simple", "efficient"] | None = "simple",
-    ) -> None:
-        """Input for the `Prescription` class."""
-        self._rx = rx
-        self._rx_type = rx_type
+    sphere: float = 0
+    cylinder: float = 0
+    axis: float = 180
+    add: Add = Add()
+    intermediate_add: Add = Add(working_distance_cm=50)
+    back_vertex_mm: float = 12.0
 
-        if self._rx_type not in ["simple", "efficient"]:
-            raise PrescriptionInputError(
-                value=rx_type,
-                message="rx_type must be 'simple' or 'efficient'",
+    vertical_prism: VerticalPrism = VerticalPrism()
+    horizontal_prism: HorizontalPrism = HorizontalPrism()
+    reading_vertical_prism: VerticalPrism = VerticalPrism()
+    reading_horizontal_prism: HorizontalPrism = HorizontalPrism()
+    extra_adds: list[Add] = []
+
+    @pydantic.validator("axis")
+    @classmethod
+    def _axis_valid(cls, value: float) -> float:
+        """Validate axis.
+
+        Axis must be between 180 to 0 degrees.
+        """
+        if value > 180 or value < 0:
+            raise PrescriptionError(
+                value=value, message="Axis must be between 0 and 180 degrees"
             )
-        if self._rx_type == "simple":
-            self._simple_parse_rx()
+        return value
 
-    def _simple_parse_rx(self) -> None:
-        """Parse input."""
-        rx_components = self._rx.split("/")
+    @property
+    def mean_sphere(self) -> float:
+        """Provide mean sphere value of the prescription.
+
+        Returns:
+            (float): The Mean Sphere.
+        """
+        return self.sphere + (self.cylinder / 2)
+
+    def transpose(self, flag: Optional[Literal["n", "p"]] = None) -> None:
+        """Transpose prescription from positive to negative and vice versa.
+
+        Flags, `'n'` and `'p'`, can be provided to force a negative or positive cylinder respectively.
+
+
+        Args:
+            flag (Literal["n", "p"] | None): Flag to force negative ('n') and positive ('p') cylindrical format. Defaults to `None`.
+
+        Examples:
+            Transposing a prescription as normal:
+            >>> rx = Prescription("+1.00/-1.00x180")
+            >>> rx.transpose()
+            >>> str(rx)
+            "plano / +1.00 x 90"
+            >>> rx.transpose()
+            >>> str(rx)
+            "+1.00 / -1.00 x 180"
+
+            Transposing a prescription with the 'n' flag:
+            >>> rx = Prescription("+1.00/-1.00x180").transpose('n')
+            >>> str(rx)
+            "+1.00 / -1.00 x 180"
+        """
+        if flag is not None and flag not in ["n", "p"]:
+            raise PrescriptionError(
+                value=flag,
+                message="Method transpose() only accepts 'n' and 'p' as input flags",
+            )
+        if (
+            flag == "n"
+            and self.cylinder > 0
+            or flag == "p"
+            and self.cylinder < 0
+            or flag is None
+            and self.cylinder != 0
+        ):
+            self.sphere = self.sphere + self.cylinder
+            self.cylinder = -1 * self.cylinder
+            new_axis = self.axis + 90
+            if new_axis > 180:
+                new_axis = new_axis - 180
+            self.axis = new_axis
+
+    def _simple_parse_rx(self, rx: str) -> None:
+        """Parse rx for a simple input.
+
+        For example: simple input is '+1.00/-1.00x90'
+        """
+        # TODO: parse this '+1.00/-1.00x90 Add +2.00@40'
+        rx_components = rx.split("/")
         sphere = rx_components[0]
         cylinder = "0"
         axis = "180"
@@ -51,87 +119,63 @@ class Prescription:
         if type(sphere) == str and sphere[0:2] == "pl":
             sphere = "0"
 
-        self._Rx = Rx(sphere=sphere, cylinder=cylinder, axis=axis)
+        self.sphere = float(sphere)
+        self.cylinder = float(cylinder)
+        self.axis = float(axis)
 
-    def _convert_cyl(self) -> None:
-        """Change the from negative to positive cylinder and vice versa."""
-        rx = self._Rx
-        new_axis = rx.axis + 90
-        if new_axis > 180:
-            new_axis = new_axis - 180
+    def parse(self, rx: str, efficient_parser: bool = False) -> BaseModel:
+        """Parse a prescription in a more typical format.
 
-        self._Rx = Rx(
-            sphere=(rx.sphere + rx.cylinder),
-            cylinder=(-1 * rx.cylinder),
-            axis=new_axis,
-        )
-
-    @property
-    def rx(self) -> Rx:
-        """Return prescription."""
-        return self._Rx
-
-    def transpose(self, value: Literal["n", "p"] | None = None) -> None:
-        """Transpose prescription from positive to negative and vice versa.
-
-        Flags, `'n'` and `'p'`, can be provided to force a negative or positive cylinder respectively.
-
+        This is more familiar than setting a prescription using keyword arguments.
 
         Args:
-            value (Literal["n", "p"] | None): Flag to force negative ('n') and positive ('p') cylindrical format. Defaults to `None`.
+            rx (str): The prescription as a string.
+            efficient_parser (bool): If set to `True`, will use the efficient parser as opposed to simple.
 
         Examples:
-            Transposing a prescription as normal.
-            >>> p = Prescription("+1.00/-1.00x180")
-            >>> p.transpose()
-            >>> p
-            "plano / +1.00 x 90"
-            >>> p.transpose()
-            >>> p
-            "+1.00 / -1.00 x 180"
+            Parsing a simple prescription:
+            >>> rx = Prescription().parse("+1.00/-1.00x180")
+            >>> rx.transpose()
+            >>> str(rx)
+            'pl / +1.00 x 90'
 
-            Transposing a prescription with the 'n' flag.
-            >>> p = Prescription("+1.00/-1.00x180").transpose('n')
-            >>> p
-            "+1.00 / -1.00 x 180"
+            Parsing a 'efficient' prescription:
+            >>> # TODO!
+            >>> # Coming soon.
         """
-        if value is not None and value not in ["n", "p"]:
-            raise TransposeInputError(
-                value=value, message="Only accepts 'n' and 'p' as input flags"
-            )
-        if (
-            value == "n"
-            and self._Rx.cylinder > 0
-            or value == "p"
-            and self._Rx.cylinder < 0
-            or value is None
-            and self._Rx.cylinder != 0
-        ):
-            self._convert_cyl()
+        if not efficient_parser:
+            self._simple_parse_rx(rx)
+        return self
+        # TODO: efficient Rx parser to be written.
 
     def __str__(self) -> str:
         """Provide string representation of object."""
-        rx = self._Rx
+
+        def _give_plus_sign(value: float) -> str:
+            """Will append '+' if the value is positive and will return value to 2 decimal places."""
+            if value >= 0:
+                return f"+{value:0.2f}"
+            else:
+                return f"{value:0.2f}"
 
         str_lst = []
-        if rx.sphere > 0:
-            str_lst.append("+")
-
-        if rx.sphere == 0:
+        if self.sphere == 0:
             str_lst.append("plano")
         else:
-            str_lst.append(f"{rx.sphere:0.2f}")
+            str_lst.append(_give_plus_sign(self.sphere))
 
-        if rx.sphere != 0 and rx.cylinder == 0:
+        if self.sphere != 0 and self.cylinder == 0:
             str_lst.append(" DS")
-        elif rx.cylinder != 0:
+        elif self.cylinder != 0:
             str_lst.append(" / ")
-            str_lst.append(f"{rx.cylinder:0.2f}")
-            str_lst.append(" x ")
-            str_lst.append(f"{rx.axis}")
-        return "".join(str_lst)
+            str_lst.append(_give_plus_sign(self.cylinder))
 
-    def __repr__(self) -> str:
-        """Provide representation."""
-        lst = str(self._Rx).split(" ")
-        return f"{self.__class__.__name__}({', '.join(lst)})"
+            str_lst.append(" x ")
+            str_lst.append(strip_decimal(self.axis))
+
+        # deal with add
+
+        # intermediate add
+
+        # prisms
+        return "".join(str_lst)
