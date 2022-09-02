@@ -1,6 +1,6 @@
 """Main entry point for the pydantic model."""
 
-from typing import Literal, Optional
+from typing import List, Literal, Optional
 
 import pydantic
 
@@ -31,7 +31,7 @@ class Prescription(BaseModel):
     horizontal_prism: HorizontalPrism = HorizontalPrism()
     reading_vertical_prism: VerticalPrism = VerticalPrism()
     reading_horizontal_prism: HorizontalPrism = HorizontalPrism()
-    extra_adds: list[Add] = []
+    extra_adds: List[Add] = []
 
     @pydantic.validator("axis")
     @classmethod
