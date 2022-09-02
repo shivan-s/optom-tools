@@ -380,7 +380,7 @@
 <pre><code class="language-python"># myscript.py
 from optom_tools import Prescription
 
-rx = Prescription(&quot;+1.00/-2.00x180&quot;)
+rx = Prescription.parse(&quot;+1.00/-2.00x180&quot;)
 rx.transpose()
 
 print(str(prescription))
