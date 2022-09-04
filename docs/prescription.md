@@ -5,5 +5,6 @@
       members:
         - transpose
         - parse
+        - random
         - dict
       show_source: false
