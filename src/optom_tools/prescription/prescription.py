@@ -1,5 +1,7 @@
 """Main entry point for the pydantic model."""
 
+import math
+import random
 from typing import List, Optional, Tuple
 
 import pydantic
@@ -158,6 +160,44 @@ class Prescription(BaseModel):
         self.cylinder = float(rx_tuple[1])
         self.axis = float(rx_tuple[2])
         return self
+
+    # TODO: need to distribute rx normally.
+    def random(self, rx_range: float = 30, seed: Optional[int] = None) -> None:
+        """Generate a random prescription.
+
+        All results will produce negative cylinderical results. Use the transpose() method to return positive cylindrical results.
+
+        Args:
+            rx_range (float): The +/- range of prescription in dioptres.
+            seed (Optional[int]): Seed for setting random.seed().
+
+        Examples:
+            Typical use:
+            >>> rx = Prescription().random()
+            >>> str(rx)
+            '+1.00 / -1.00 x 173'
+        """
+        MEAN = -1
+        STD = 1
+
+        def _pdf(x: float, mean: float = MEAN, std: float = STD):
+            """Point density function for weighting random selection of prescriptions.
+
+            This is inplace because more extreme prescriptions like -30 are rare.
+            """
+            y = (x - mean) / std
+            inter = (math.exp(-1 * y**2 / 2)) / math.sqrt(2 * math.pi)
+            return inter / std
+
+        rx_lst = [
+            x / 100 for x in range(int(-1 * rx_range * 100), int(rx_range * 100), 25)
+        ]
+        weights = [_pdf(x) for x in rx_lst]
+        if seed is not None:
+            random.seed(seed)
+        self.sphere = random.choices(rx_lst, weights=weights, k=1)[0]
+        self.cylinder = abs(random.choices(rx_lst, weights=weights, k=1)[0]) * -1
+        self.axis = random.randint(0, 180)
 
     def __str__(self) -> str:
         """Provide string representation of object."""
