@@ -210,3 +210,12 @@ class TestPrescription:
             assert rx == expected
         if excinfo is not None:
             assert excinfo.value.message == exception_message
+
+    def test_random(self):
+        """Test random generation of prescription."""
+        SEED = 42
+        rx = Prescription()
+        rx.random(seed=SEED)
+        assert rx.sphere == -0.75
+        assert rx.cylinder == -3.0
+        assert rx.axis == 70.0
