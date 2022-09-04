@@ -278,6 +278,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#optom_tools.prescription.prescription.Prescription.random" class="md-nav__link">
+    random()
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -344,6 +351,13 @@
         <li class="md-nav__item">
   <a href="#optom_tools.prescription.prescription.Prescription.parse" class="md-nav__link">
     parse()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#optom_tools.prescription.prescription.Prescription.random" class="md-nav__link">
+    random()
   </a>
   
 </li>
@@ -501,6 +515,66 @@
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rx</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="n">rx</span><span class="p">)</span>
 <span class="go">&#39;pl / +1.00 x 90&#39;</span>
+</code></pre></div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h2 id="optom_tools.prescription.prescription.Prescription.random" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">random</span><span class="p">(</span><span class="n">rx_range</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Generate a random prescription.</p>
+<p>All results will produce negative cylinderical results. Use the transpose() method to return positive cylindrical results.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>rx_range</code></td>
+          <td>
+                <code>float</code>
+          </td>
+          <td><p>The +/- range of prescription in dioptres.</p></td>
+          <td>
+                <code>30</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>seed</code></td>
+          <td>
+                <code><span title="typing.Optional">Optional</span>[int]</code>
+          </td>
+          <td><p>Seed for setting random.seed().</p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+<p><strong>Examples:</strong></p>
+    <p>Typical use:</p>
+    <div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">rx</span> <span class="o">=</span> <span class="n">Prescription</span><span class="p">()</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="n">rx</span><span class="p">)</span>
+<span class="go">&#39;+1.00 / -1.00 x 173&#39;</span>
 </code></pre></div>
 
   </div>
