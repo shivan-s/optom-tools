@@ -12,7 +12,7 @@
 
 `optom-tools` is designed to help indivduals who deal with optometry related data.
 
-![Rx Demo](./docs/demo/optom-tools-rx.gif)
+![Rx Demo](./demo/optom-tools-rx.gif)
 
 ## Getting Started
 
