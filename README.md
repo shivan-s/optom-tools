@@ -9,6 +9,10 @@
 [![Implementation](https://img.shields.io/pypi/implementation/optom-tools.svg)](https://pypi.python.org/pypi/optom-tools/)
 [![License](https://img.shields.io/pypi/status/optom-tools.svg)](https://pypi.python.org/pypi/optom-tools/)
 
+`optom-tools` is designed to help indivduals who deal with optometry related data.
+
+![Rx Demo](./docs/demo/optom-tools-rx.gif)
+
 ## Getting Started
 
 Install with `pip` or your other favourite package manager (e.g. `pipenv` or `poetry`).

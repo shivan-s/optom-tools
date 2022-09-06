@@ -9,7 +9,10 @@
 [![Implementation](https://img.shields.io/pypi/implementation/optom-tools.svg)](https://pypi.python.org/pypi/optom-tools/)
 [![License](https://img.shields.io/pypi/status/optom-tools.svg)](https://pypi.python.org/pypi/optom-tools/)
 
-`optom-tools` are a set of tools for working with data associated in the wonderful world of optometry.
+
+`optom-tools` is designed to help indivduals who deal with optometry related data.
+
+![Rx Demo](./docs/demo/optom-tools-rx.gif)
 
 ## Getting Started
 
