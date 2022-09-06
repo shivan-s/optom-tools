@@ -265,6 +265,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#optom_tools.prescription.prescription.Prescription.mean_sphere" class="md-nav__link">
+    mean_sphere()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#optom_tools.prescription.prescription.Prescription.transpose" class="md-nav__link">
     transpose()
   </a>
@@ -342,6 +349,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#optom_tools.prescription.prescription.Prescription.mean_sphere" class="md-nav__link">
+    mean_sphere()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#optom_tools.prescription.prescription.Prescription.transpose" class="md-nav__link">
     transpose()
   </a>
@@ -395,6 +409,9 @@
     <div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">rx</span> <span class="o">=</span> <span class="n">Prescription</span><span class="p">(</span><span class="n">sphere</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">cylinder</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">180</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="n">rx</span><span class="p">)</span>
 <span class="go">&#39;plano / -1.00 x 180&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rx</span> <span class="o">=</span> <span class="n">Prescription</span><span class="p">(</span><span class="n">sphere</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">add</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;add&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="n">rx</span><span class="p">)</span>
+<span class="go">&#39;+1.00 DS Add: +1.00 @ 40cm&#39;</span>
 </code></pre></div>
 
 
@@ -410,6 +427,46 @@
 
 
 
+
+<div class="doc doc-object doc-function">
+
+
+
+<h2 id="optom_tools.prescription.prescription.Prescription.mean_sphere" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">mean_sphere</span><span class="p">()</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Provide mean sphere value of the prescription.</p>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code>float</code>
+          </td>
+          <td><p>The Mean Sphere.</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+  </div>
+
+</div>
 
 <div class="doc doc-object doc-function">
 

@@ -280,6 +280,27 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#optom_tools.visual_acuity.visual_acuity.VisualAcuity.m" class="md-nav__link">
+    m()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#optom_tools.visual_acuity.visual_acuity.VisualAcuity.ft" class="md-nav__link">
+    ft()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#optom_tools.visual_acuity.visual_acuity.VisualAcuity.snellen_fraction" class="md-nav__link">
+    snellen_fraction()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#optom_tools.visual_acuity.visual_acuity.VisualAcuity.parse" class="md-nav__link">
     parse()
   </a>
@@ -337,6 +358,27 @@
         <li class="md-nav__item">
   <a href="#optom_tools.VisualAcuity" class="md-nav__link">
     optom_tools.VisualAcuity
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#optom_tools.visual_acuity.visual_acuity.VisualAcuity.m" class="md-nav__link">
+    m()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#optom_tools.visual_acuity.visual_acuity.VisualAcuity.ft" class="md-nav__link">
+    ft()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#optom_tools.visual_acuity.visual_acuity.VisualAcuity.snellen_fraction" class="md-nav__link">
+    snellen_fraction()
   </a>
   
 </li>
@@ -425,7 +467,7 @@
         <tr>
           <td><code>unit</code></td>
           <td>
-                <code><span title="typing_extensions.Literal">Literal</span>[<span title="optom_tools.visual_acuity.visual_acuity.VisualAcuity.ft">ft</span>, <span title="optom_tools.visual_acuity.visual_acuity.VisualAcuity.m">m</span>]</code>
+                <code><span title="typing_extensions.Literal">Literal</span>[<a class="autorefs autorefs-internal" title="optom_tools.visual_acuity.visual_acuity.VisualAcuity.ft" href="#optom_tools.visual_acuity.visual_acuity.VisualAcuity.ft">ft</a>, <a class="autorefs autorefs-internal" title="optom_tools.visual_acuity.visual_acuity.VisualAcuity.m" href="#optom_tools.visual_acuity.visual_acuity.VisualAcuity.m">m</a>]</code>
           </td>
           <td><p>Takes feet or metres/meters only. Defaults to 'm', but please check examples for nuances.</p></td>
           <td>
@@ -470,6 +512,146 @@
 
 
 
+
+<div class="doc doc-object doc-function">
+
+
+
+<h2 id="optom_tools.visual_acuity.visual_acuity.VisualAcuity.m" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">m</span><span class="p">()</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Return snellen fraction in metres/meters.</p>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+<th>Name</th>        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+<td><code>str</code></td>          <td>
+                <code>str</code>
+          </td>
+          <td><p>Snellen Fraction in meters/metres.</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+<p><strong>Examples:</strong></p>
+    <p>Typical use:</p>
+    <div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">va</span> <span class="o">=</span> <span class="n">VisualAcuity</span><span class="p">(</span><span class="s1">&#39;20/20&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">va</span><span class="o">.</span><span class="n">m</span>
+<span class="go">&#39;6/6&#39;</span>
+</code></pre></div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h2 id="optom_tools.visual_acuity.visual_acuity.VisualAcuity.ft" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">ft</span><span class="p">()</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Return snellen fraction representation in feet.</p>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code>str</code>
+          </td>
+          <td><p>Snellen Fraction in feet.</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+<p><strong>Examples:</strong></p>
+    <p>Typical use:</p>
+    <div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">va</span> <span class="o">=</span> <span class="n">VisualAcuity</span><span class="p">(</span><span class="s1">&#39;6/6&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">va</span><span class="o">.</span><span class="n">ft</span>
+<span class="go">&#39;20/20&#39;</span>
+</code></pre></div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h2 id="optom_tools.visual_acuity.visual_acuity.VisualAcuity.snellen_fraction" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">snellen_fraction</span><span class="p">()</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Return snellen fraction representation of visual acuity.</p>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+<th>Name</th>        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+<td><code>str</code></td>          <td>
+                <code>str</code>
+          </td>
+          <td><p>snellen fraction.</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+<p><strong>Examples:</strong></p>
+    <p>Typical use:</p>
+    <div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">VisualAcuity</span><span class="p">(</span><span class="s2">&quot;6 / 12&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">snellen_fraction</span>
+<span class="go">&quot;6/6&quot;</span>
+</code></pre></div>
+
+  </div>
+
+</div>
 
 <div class="doc doc-object doc-function">
 
