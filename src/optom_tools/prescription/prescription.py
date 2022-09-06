@@ -198,6 +198,13 @@ class Prescription(BaseModel):
         self.sphere = random.choices(rx_lst, weights=weights, k=1)[0]
         self.cylinder = abs(random.choices(rx_lst, weights=weights, k=1)[0]) * -1
         self.axis = random.randint(0, 180)
+        self.add = Add(add=(random.choice(range(0, 250, 25)) / 100))
+        self.vertical_prism = VerticalPrism(
+            magnitude=random.randint(0, 5), direction=random.choice(["U", "D"])
+        )
+        self.horizontal_prism = HorizontalPrism(
+            magnitude=random.randint(0, 5), direction=random.choice(["I", "O"])
+        )
 
     def __str__(self) -> str:
         """Provide string representation of object."""
@@ -224,9 +231,11 @@ class Prescription(BaseModel):
             str_lst.append(" x ")
             str_lst.append(strip_decimal(self.axis))
 
-        # deal with add
+        if self.add.add != 0:
+            str_lst.append(" Add: ")
+            str_lst.append(_give_plus_sign(self.add.add))
+            str_lst.append(" @ ")
+            str_lst.append(strip_decimal(self.add.working_distance_cm))
+            str_lst.append("cm")
 
-        # intermediate add
-
-        # prisms
         return "".join(str_lst)

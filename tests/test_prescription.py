@@ -37,6 +37,13 @@ class TestPrescription:
                 id="Normal input sphere only",
             ),
             pytest.param(
+                {"sphere": 1, "add": {"add": 1.5, "working_distance_cm": 30}},
+                "+1.00 DS Add: +1.50 @ 30cm",
+                does_not_raise(),
+                None,
+                id="Add",
+            ),
+            pytest.param(
                 {"sphere": 1, "cyliner": -1, "axis": 190},
                 None,
                 pytest.raises(PrescriptionError),
@@ -219,3 +226,8 @@ class TestPrescription:
         assert rx.sphere == -0.75
         assert rx.cylinder == -3.0
         assert rx.axis == 70.0
+        assert rx.add.add == 0.75
+        assert rx.vertical_prism.magnitude == 1.0
+        assert rx.vertical_prism.direction == "U"
+        assert rx.horizontal_prism.magnitude == 5.0
+        assert rx.horizontal_prism.direction == "I"
