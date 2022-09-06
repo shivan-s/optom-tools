@@ -21,6 +21,9 @@ class Prescription(BaseModel):
         >>> rx = Prescription(sphere=0, cylinder=-1, axis=180)
         >>> str(rx)
         'plano / -1.00 x 180'
+        >>> rx = Prescription(sphere=1, add={"add": 1})
+        >>> str(rx)
+        '+1.00 DS Add: +1.00 @ 40cm'
     """
 
     sphere: float = 0
