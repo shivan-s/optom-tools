@@ -21,6 +21,10 @@ classifiers = [
   "Intended Audience :: Healthcare Industry",
   "Natural Language :: English",
   "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.7",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3 :: Only",
   "Programming Language :: Python :: Implementation :: CPython",
 ]
@@ -62,7 +66,8 @@ mypy_path = "src"
 ignore_missing_imports = true
 
 [tool.pydocstyle]
-match = '.*\.py'
+match = 'src(.*)\.py'
+convention = "google"
 
 [tool.commitizen]
 name = "cz_conventional_commits"

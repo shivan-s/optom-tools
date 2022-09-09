@@ -1,4 +1,4 @@
-# run on ipytho
+# run on ipython
 .PHONY: run
 run:
 	pipenv run ipython -i src/optom_tools/main.py
